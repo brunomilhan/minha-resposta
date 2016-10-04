@@ -15,15 +15,27 @@ public class LoginBean {
     public LoginBean() {
     }
 
+    private String resolvePerfil() {
+        if (perfil == 1)
+            return "Cliente";
+        if (perfil == 2)
+            return "Gerente";
+        if (perfil == 3)
+            return "Administrador";
+        return "";
+    }
+
     public String getLogin() {
-        if (login.equals(senha)){
-            Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-            String time = dateFormat.format(date.getTime());
-            return perfil + ", login bem sucedido, para " + login + " às " + time;
+        if (login != null) {
+            if (login.equals(senha)) {
+                Date date = new Date();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                String time = dateFormat.format(date.getTime());
+                return resolvePerfil() + ", login bem sucedido, para " + login + " às " + time;
+            } else
+                return "Acesso negado";
         }
-        else
-            return "Acesso negado";
+        return "";
     }
 
     public void setLogin(String login) {
